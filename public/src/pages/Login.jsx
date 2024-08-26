@@ -10,13 +10,6 @@ import {loginRoute} from "../utils/APIRoutes";
 export default function Login() {
     const navigate = useNavigate();
 
-    //根据本地缓存，直接进入聊天界面，如果没有不跳转
-    useEffect(() => {
-        if (localStorage.getItem('chat-app-user')) {
-            navigate('/chat');
-        }
-    }, [])
-
     //控制传入用户数据
     const [values, setValues] = useState({
         username: "",
