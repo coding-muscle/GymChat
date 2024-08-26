@@ -15,25 +15,21 @@ export default function Chat() {
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentUser, setCurrentUser] = useState(undefined);
 
+    //设置当前用户
     useEffect(() => {
-        async function checkItem() {
-            if (!localStorage.getItem("chat-app-user")) {
-                navigate("/login");
-            } else {
-                setCurrentUser(
-                    await JSON.parse(
-                        localStorage.getItem("chat-app-user")
-                    )
-                );
-            }
+        async function setCurrentUserInner() {
+            setCurrentUser(
+                await JSON.parse(localStorage.getItem("chat-app-user")));
         }
-        checkItem();
+        setCurrentUserInner();
     }, []);
 
     useEffect(() => {
         if (currentUser) {
             socket.current = io(host);
             socket.current.emit("add-user", currentUser._id);
+        } else {
+            console.log("用户未建立连接");
         }
     }, [currentUser]);
 
