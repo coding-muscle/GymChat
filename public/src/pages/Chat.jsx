@@ -11,9 +11,9 @@ import {io} from "socket.io-client";
 export default function Chat() {
     const socket = useRef();
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(undefined);
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
-    const [currentUser, setCurrentUser] = useState(undefined);
 
     //设置当前用户
     useEffect(() => {
@@ -28,8 +28,9 @@ export default function Chat() {
         if (currentUser) {
             socket.current = io(host);
             socket.current.emit("add-user", currentUser._id);
+            console.log("用户与服务器建立连接成功")
         } else {
-            console.log("用户未建立连接");
+            console.log("用户未与服务器建立连接");
         }
     }, [currentUser]);
 

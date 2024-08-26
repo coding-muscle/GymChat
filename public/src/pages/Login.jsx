@@ -16,6 +16,12 @@ export default function Login() {
         password: "",
     });
 
+    useEffect(() => {
+        if (localStorage.getItem("chat-app-user")) {
+            navigate("/chat");
+        }
+    })
+
     //改变处理函数，values随着输入框内容改变而改变
     const handleChange = (event) => {
         setValues({...values, [event.target.name]: event.target.value})
