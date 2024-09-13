@@ -46,7 +46,7 @@ export default function Chat() {
             }
         }
         setContactsInner();
-    }, [currentUser]);
+    }, [currentUser, navigate]);
 
     const handleChatChange = (chat) => {
         setCurrentChat(chat);
